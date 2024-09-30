@@ -1,7 +1,7 @@
 import { MAX_NUMBER, MIN_NUMBER } from '../src/const/num-range';
 import { TargetNumber } from '../src/domain/TargetNumber';
 
-describe('TargetNum 클래스 테스트', () => {
+describe('TargetNumber 클래스 테스트', () => {
     it('세자리 숫자로 이루어진 문자열로 새 인스턴스를 생성하면 해당 숫자로 이루어진 number 배열이 생성된다', () => {
         const testNum = new TargetNumber('123');
         const result = testNum.getNumbers();
