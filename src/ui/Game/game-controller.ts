@@ -1,20 +1,37 @@
 import * as readlinePromises from 'readline/promises';
 import { TargetNumber } from '../../domain/TargetNumber';
-import { TargetNumberFactory } from '../../domain/TargetNumberFactory';
+import { GameService } from '../../service/game-service';
 import { GamePresenter } from './game-presenter';
 
 export class GameController {
+    private static instance: GameController;
     constructor(
         private readonly rl: readlinePromises.Interface,
-        private readonly gamePresenter: GamePresenter, //private readonly gameService: GameService,
+        private readonly gamePresenter: GamePresenter,
+        private readonly gameService: GameService,
     ) {}
-    async startGame() {
-        const targetNumberFactory = new TargetNumberFactory();
-        const targetNumber = targetNumberFactory.generateTargetNumber();
+
+    static getInstance(rl: readlinePromises.Interface, gamePresenter: GamePresenter, gameService: GameService) {
+        if (!GameController.instance) {
+            GameController.instance = new GameController(rl, gamePresenter, gameService);
+        }
+        return GameController.instance;
+    }
+
+    async runGame() {
         this.gamePresenter.showNumberSet();
+
+        await this.gameService.playGame(
+            this.getGuessNumber.bind(this),
+            this.gamePresenter.showResult.bind(this.gamePresenter),
+        );
+
+        this.gamePresenter.showGameEnd();
+    }
+
+    async getGuessNumber(): Promise<TargetNumber> {
         const input = await this.getNumbers();
-        const guessNumber = new TargetNumber(input);
-        //게임 진행 로직
+        return new TargetNumber(input);
     }
 
     async getCommands(): Promise<string> {
