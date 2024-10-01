@@ -1,5 +1,5 @@
 import { MAX_NUMBER, MIN_NUMBER, NUM_LENGTH } from '../const/num-range';
-import { TargetNumber } from './TargetNumber';
+import { TargetNumber } from '../domain/TargetNumber';
 
 export class TargetNumberFactory {
     private shuffle(array: number[]) {
