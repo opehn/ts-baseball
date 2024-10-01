@@ -1,10 +1,10 @@
 import { stdin, stdout } from 'node:process';
 import * as readlinePromises from 'node:readline/promises';
-import { Command, CommandType } from './domain/command';
-import { TargetNumberFactory } from './factory/target-number-factory';
-import { GameService } from './service/game-service';
-import { GameController } from './ui/Game/game-controller';
-import { GamePresenter } from './ui/Game/game-presenter';
+import { Command, CommandType } from './domain/command.model';
+import { TargetNumberFactory } from './factory/target-number.factory';
+import { GameService } from './service/game.service';
+import { GameController } from './ui/Game/game.controller';
+import { GamePresenter } from './ui/Game/game.presenter';
 
 async function createReadline(input: NodeJS.ReadableStream, output: NodeJS.WritableStream) {
     return readlinePromises.createInterface({ input, output });

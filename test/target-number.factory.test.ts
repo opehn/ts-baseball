@@ -1,5 +1,5 @@
 import { NUM_LENGTH } from '../src/const/num-range';
-import { TargetNumberFactory } from '../src/factory/target-number-factory';
+import { TargetNumberFactory } from '../src/factory/target-number.factory';
 
 describe('TargetNumberFactory 클래스 테스트', () => {
     let factory: TargetNumberFactory;

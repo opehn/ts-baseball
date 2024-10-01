@@ -1,6 +1,6 @@
 import { NUM_LENGTH } from '../const/num-range';
-import { TargetNumber } from '../domain/TargetNumber';
-import { TargetNumberFactory } from '../factory/target-number-factory';
+import { TargetNumber } from '../domain/target-number.model';
+import { TargetNumberFactory } from '../factory/target-number.factory';
 export interface Result {
     strike: number;
     ball: number;

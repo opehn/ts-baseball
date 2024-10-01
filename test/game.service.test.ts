@@ -1,6 +1,6 @@
-import { TargetNumber } from '../src/domain/TargetNumber';
-import { TargetNumberFactory } from '../src/factory/target-number-factory';
-import { GameService } from '../src/service/game-service';
+import { TargetNumber } from '../src/domain/target-number.model';
+import { TargetNumberFactory } from '../src/factory/target-number.factory';
+import { GameService } from '../src/service/game.service';
 
 describe('GameService 클래스', () => {
     const gameService: GameService = GameService.getInstance(new TargetNumberFactory());

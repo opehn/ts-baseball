@@ -1,7 +1,7 @@
 import * as readlinePromises from 'readline/promises';
-import { TargetNumber } from '../../domain/TargetNumber';
-import { GameService } from '../../service/game-service';
-import { GamePresenter } from './game-presenter';
+import { TargetNumber } from '../../domain/target-number.model';
+import { GameService } from '../../service/game.service';
+import { GamePresenter } from './game.presenter';
 
 export class GameController {
     private static instance: GameController;

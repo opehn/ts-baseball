@@ -1,5 +1,5 @@
 import { NUM_LENGTH } from '../../const/num-range';
-import { Result } from '../../service/game-service';
+import { Result } from '../../service/game.service';
 
 export class GamePresenter {
     showMenu() {
