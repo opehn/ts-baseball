@@ -1,5 +1,5 @@
 import { NUM_LENGTH } from '../../const/num-range';
-import { Result } from '../../service/game.service';
+import { ResultResponse } from '../../dto/result-response.dto';
 
 export class GamePresenter {
     showMenu() {
@@ -15,7 +15,7 @@ export class GamePresenter {
         console.log('숫자를 입력해주세요');
     }
 
-    showResult(result: Result) {
+    showResult(result: ResultResponse) {
         let resultString = '';
         result.strike ? (resultString += `스트라이크 : ${result.strike}`) : resultString;
         result.ball ? (resultString += ` 볼 : ${result.ball}`) : resultString;

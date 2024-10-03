@@ -1,9 +1,7 @@
 import { GameNumber } from '../src/domain/game-number.model';
-import { GameService } from '../src/service/game.service';
+import { ResultService } from '../src/service/result.service';
 
-describe('GameService 클래스', () => {
-    const gameService: GameService = GameService.getInstance();
-
+describe('ResultService 클래스', () => {
     describe('CompareNumbers 테스트', () => {
         test.each([
             ['123', '145', { strike: 1, ball: 0 }],
@@ -12,7 +10,8 @@ describe('GameService 클래스', () => {
         ])('숫자 하나만 위치까지 같을 때 strike 1 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
             const targetNumber = GameNumber.from(target);
             const guessNumber = GameNumber.from(guess);
-            expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+            const resultService = new ResultService(targetNumber, guessNumber);
+            expect(resultService.getResult()).toEqual(expected);
         });
 
         test.each([
@@ -22,7 +21,8 @@ describe('GameService 클래스', () => {
         ])('숫자 두개가 위치까지 같을 때 strike 2 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
             const targetNumber = GameNumber.from(target);
             const guessNumber = GameNumber.from(guess);
-            expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+            const resultService = new ResultService(targetNumber, guessNumber);
+            expect(resultService.getResult()).toEqual(expected);
         });
 
         test.each([['123', '123', { strike: 3, ball: 0 }]])(
@@ -30,7 +30,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
 
@@ -43,7 +44,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
 
@@ -56,7 +58,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
 
@@ -69,7 +72,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
 
@@ -78,7 +82,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
 
@@ -87,7 +92,8 @@ describe('GameService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
+                const resultService = new ResultService(targetNumber, guessNumber);
+                expect(resultService.getResult()).toEqual(expected);
             },
         );
     });
