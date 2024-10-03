@@ -1,6 +1,5 @@
 import { NUM_LENGTH } from '../const/num-range';
-import { TargetNumber } from '../domain/target-number.model';
-import { TargetNumberFactory } from '../factory/target-number.factory';
+import { GameNumber } from '../domain/game-number.model';
 export interface Result {
     strike: number;
     ball: number;
@@ -9,20 +8,20 @@ export interface Result {
 export class GameService {
     private static instance: GameService;
 
-    constructor(private readonly targetNumberFactory: TargetNumberFactory) {}
+    constructor() {}
 
-    public static getInstance(targetNumberFactory: TargetNumberFactory): GameService {
+    public static getInstance(): GameService {
         if (!GameService.instance) {
-            GameService.instance = new GameService(targetNumberFactory);
+            GameService.instance = new GameService();
         }
         return GameService.instance;
     }
 
     async playGame(
-        getNumbersCallback: () => Promise<TargetNumber>,
+        targetNumber: GameNumber,
+        getNumbersCallback: () => Promise<GameNumber>,
         showResultCallback: (result: Result) => void,
     ): Promise<void> {
-        const targetNumber = this.targetNumberFactory.generateTargetNumber();
         const guessNumber = await getNumbersCallback();
 
         let result = this.compareNumbers(targetNumber, guessNumber);
@@ -36,7 +35,7 @@ export class GameService {
         }
     }
 
-    private compareNumbers(targetNumber: TargetNumber, guessNumber: TargetNumber): Result {
+    private compareNumbers(targetNumber: GameNumber, guessNumber: GameNumber): Result {
         let strike = 0;
         let ball = 0;
 
@@ -53,7 +52,7 @@ export class GameService {
         return { strike, ball };
     }
 
-    testCompareNumbers(targetNumber: TargetNumber, guessNumber: TargetNumber): Result {
+    testCompareNumbers(targetNumber: GameNumber, guessNumber: GameNumber): Result {
         return this.compareNumbers(targetNumber, guessNumber);
     }
 }

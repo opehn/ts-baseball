@@ -1,5 +1,5 @@
 import * as readlinePromises from 'readline/promises';
-import { TargetNumber } from '../../domain/target-number.model';
+import { GameNumber } from '../../domain/game-number.model';
 import { GameService } from '../../service/game.service';
 import { GamePresenter } from './game.presenter';
 
@@ -19,9 +19,11 @@ export class GameController {
     }
 
     async runGame() {
+        const targetNumber = GameNumber.createRandom();
         this.gamePresenter.showNumberSet();
 
         await this.gameService.playGame(
+            targetNumber,
             this.getGuessNumber.bind(this),
             this.gamePresenter.showResult.bind(this.gamePresenter),
         );
@@ -29,9 +31,9 @@ export class GameController {
         this.gamePresenter.showGameEnd();
     }
 
-    async getGuessNumber(): Promise<TargetNumber> {
+    async getGuessNumber(): Promise<GameNumber> {
         const input = await this.getNumbers();
-        return new TargetNumber(input);
+        return GameNumber.from(input);
     }
 
     async getCommands(): Promise<string> {

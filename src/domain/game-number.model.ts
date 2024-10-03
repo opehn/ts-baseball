@@ -1,9 +1,10 @@
 import { MAX_NUMBER, MIN_NUMBER, NUM_LENGTH } from '../const/num-range';
+import { generateRandomNumberString } from '../util/number';
 
-export class TargetNumber {
+export class GameNumber {
     private readonly numbers: readonly number[] = [];
 
-    constructor(input: string) {
+    private constructor(input: string) {
         const trimmedInput = input.replace(/\s/g, '');
 
         this.validateLength(trimmedInput);
@@ -14,6 +15,14 @@ export class TargetNumber {
             return inputNumber;
         });
         this.validateDuplicate();
+    }
+
+    static from(input: string) {
+        return new GameNumber(input);
+    }
+    static createRandom() {
+        const targetNumberString = generateRandomNumberString(MIN_NUMBER, MAX_NUMBER, NUM_LENGTH);
+        return new GameNumber(targetNumberString);
     }
 
     private validateLength(input: string): void {

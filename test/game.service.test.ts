@@ -1,9 +1,8 @@
-import { TargetNumber } from '../src/domain/target-number.model';
-import { TargetNumberFactory } from '../src/factory/target-number.factory';
+import { GameNumber } from '../src/domain/game-number.model';
 import { GameService } from '../src/service/game.service';
 
 describe('GameService 클래스', () => {
-    const gameService: GameService = GameService.getInstance(new TargetNumberFactory());
+    const gameService: GameService = GameService.getInstance();
 
     describe('CompareNumbers 테스트', () => {
         test.each([
@@ -11,8 +10,8 @@ describe('GameService 클래스', () => {
             ['123', '425', { strike: 1, ball: 0 }],
             ['123', '453', { strike: 1, ball: 0 }],
         ])('숫자 하나만 위치까지 같을 때 strike 1 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
-            const targetNumber = new TargetNumber(target);
-            const guessNumber = new TargetNumber(guess);
+            const targetNumber = GameNumber.from(target);
+            const guessNumber = GameNumber.from(guess);
             expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
         });
 
@@ -21,16 +20,16 @@ describe('GameService 클래스', () => {
             ['123', '423', { strike: 2, ball: 0 }],
             ['123', '153', { strike: 2, ball: 0 }],
         ])('숫자 두개가 위치까지 같을 때 strike 2 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
-            const targetNumber = new TargetNumber(target);
-            const guessNumber = new TargetNumber(guess);
+            const targetNumber = GameNumber.from(target);
+            const guessNumber = GameNumber.from(guess);
             expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
         });
 
         test.each([['123', '123', { strike: 3, ball: 0 }]])(
             '숫자 세개가 위치까지 같을 때 strike 3 ball 0이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
@@ -42,8 +41,8 @@ describe('GameService 클래스', () => {
         ])(
             '정답에 포함되지만 위치가 다른 숫자가 1개 있을 때 strike 0 ball 1이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
@@ -55,8 +54,8 @@ describe('GameService 클래스', () => {
         ])(
             '정답에 포함되지만 위치가 다른 숫자가 2개 있을 때 strike 0 ball 2이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
@@ -68,8 +67,8 @@ describe('GameService 클래스', () => {
         ])(
             '정답에 포함되지만 위치가 다른 숫자가 3개 있을 때 strike 0 ball 3이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
@@ -77,8 +76,8 @@ describe('GameService 클래스', () => {
         test.each([['123', '132', { strike: 1, ball: 2 }]])(
             '위치까지 맞는 숫자 1개, 위치가 맞지 않는 숫자 2개가 있을 때 strike 1 ball 2이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
@@ -86,8 +85,8 @@ describe('GameService 클래스', () => {
         test.each([['123', '987', { strike: 0, ball: 0 }]])(
             '포함되는 숫자가 없을 때 strike 0 ball 0이다 (정답: %s, 입력: %s)',
             (target, guess, expected) => {
-                const targetNumber = new TargetNumber(target);
-                const guessNumber = new TargetNumber(guess);
+                const targetNumber = GameNumber.from(target);
+                const guessNumber = GameNumber.from(guess);
                 expect(gameService.testCompareNumbers(targetNumber, guessNumber)).toEqual(expected);
             },
         );
