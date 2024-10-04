@@ -1,6 +1,6 @@
 import * as readlinePromises from 'readline/promises';
 import { GameNumber } from '../../domain/game-number.model';
-import { GameService } from '../../service/game.service';
+import { ResultService } from '../../service/result.service';
 import { GamePresenter } from './game.presenter';
 
 export class GameController {
@@ -8,25 +8,31 @@ export class GameController {
     constructor(
         private readonly rl: readlinePromises.Interface,
         private readonly gamePresenter: GamePresenter,
-        private readonly gameService: GameService,
+        private readonly resultService: ResultService,
     ) {}
 
-    static getInstance(rl: readlinePromises.Interface, gamePresenter: GamePresenter, gameService: GameService) {
+    static getInstance(rl: readlinePromises.Interface, gamePresenter: GamePresenter, resultService: ResultService) {
         if (!GameController.instance) {
-            GameController.instance = new GameController(rl, gamePresenter, gameService);
+            GameController.instance = new GameController(rl, gamePresenter, resultService);
         }
         return GameController.instance;
     }
 
-    async runGame() {
+    async runGame(numLength: number) {
         const targetNumber = GameNumber.createRandom();
         this.gamePresenter.showNumberSet();
 
-        await this.gameService.playGame(
-            targetNumber,
-            this.getGuessNumber.bind(this),
-            this.gamePresenter.showResult.bind(this.gamePresenter),
-        );
+        const guessNumber = await this.getGuessNumber();
+
+        let result = await this.resultService.getResult(targetNumber, guessNumber);
+        this.gamePresenter.showResult(result);
+
+        while (result.strike !== numLength) {
+            const guessNumber = await this.getGuessNumber();
+
+            result = await this.resultService.getResult(targetNumber, guessNumber);
+            this.gamePresenter.showResult(result);
+        }
 
         this.gamePresenter.showGameEnd();
     }

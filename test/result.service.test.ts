@@ -2,6 +2,7 @@ import { GameNumber } from '../src/domain/game-number.model';
 import { ResultService } from '../src/service/result.service';
 
 describe('ResultService 클래스', () => {
+    const resultService = new ResultService();
     describe('CompareNumbers 테스트', () => {
         test.each([
             ['123', '145', { strike: 1, ball: 0 }],
@@ -10,8 +11,8 @@ describe('ResultService 클래스', () => {
         ])('숫자 하나만 위치까지 같을 때 strike 1 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
             const targetNumber = GameNumber.from(target);
             const guessNumber = GameNumber.from(guess);
-            const resultService = new ResultService(targetNumber, guessNumber);
-            expect(resultService.getResult()).toEqual(expected);
+            const resultService = new ResultService();
+            expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
         });
 
         test.each([
@@ -21,8 +22,7 @@ describe('ResultService 클래스', () => {
         ])('숫자 두개가 위치까지 같을 때 strike 2 ball 0이다 (정답: %s, 입력: %s)', (target, guess, expected) => {
             const targetNumber = GameNumber.from(target);
             const guessNumber = GameNumber.from(guess);
-            const resultService = new ResultService(targetNumber, guessNumber);
-            expect(resultService.getResult()).toEqual(expected);
+            expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
         });
 
         test.each([['123', '123', { strike: 3, ball: 0 }]])(
@@ -30,8 +30,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
 
@@ -44,8 +43,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
 
@@ -58,8 +56,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
 
@@ -72,8 +69,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
 
@@ -82,8 +78,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
 
@@ -92,8 +87,7 @@ describe('ResultService 클래스', () => {
             (target, guess, expected) => {
                 const targetNumber = GameNumber.from(target);
                 const guessNumber = GameNumber.from(guess);
-                const resultService = new ResultService(targetNumber, guessNumber);
-                expect(resultService.getResult()).toEqual(expected);
+                expect(resultService.getResult(targetNumber, guessNumber)).toEqual(expected);
             },
         );
     });

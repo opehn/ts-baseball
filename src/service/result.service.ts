@@ -2,11 +2,11 @@ import { GameNumber } from '../domain/game-number.model';
 import { ResultResponse } from '../dto/result-response.dto';
 
 export class ResultService {
-    constructor(private readonly targetNumber: GameNumber, private readonly guessNumber: GameNumber) {}
+    constructor() {}
 
-    private compareNumbers(): ResultResponse {
-        const target = this.targetNumber.getNumbers();
-        const guess = this.guessNumber.getNumbers();
+    private compareNumbers(targetNumber: GameNumber, guessNumber: GameNumber): ResultResponse {
+        const target = targetNumber.getNumbers();
+        const guess = guessNumber.getNumbers();
 
         const strike = this.calculateStrike(target, guess);
         const ball = this.calculateBall(target, guess);
@@ -25,7 +25,7 @@ export class ResultService {
         );
     }
 
-    getResult() {
-        return this.compareNumbers();
+    getResult(targetNumber: GameNumber, guessNumber: GameNumber) {
+        return this.compareNumbers(targetNumber, guessNumber);
     }
 }
